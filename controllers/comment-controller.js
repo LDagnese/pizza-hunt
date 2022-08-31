@@ -20,7 +20,8 @@ const commentController = {
     Comment.findOneAndDelete({ _id: params.commentId })
       .then((deletedComment) => {
         if (!deletedComment) {
-          return res.status(404).json({ message: "No comment with this id" });
+          res.status(404).json({ message: "No comment with this id" });
+          return;
         }
         return Pizza.findOneAndUpdate(
           { _id: params.pizzaId },
@@ -30,7 +31,8 @@ const commentController = {
       })
       .then((dbPizzaData) => {
         if (!dbPizzaData) {
-          return res.status(404).json({ message: "No pizza found with this id!" });
+          res.status(404).json({ message: "No pizza found with this id!" });
+          return;
         }
         res.json(dbPizzaData);
       })
